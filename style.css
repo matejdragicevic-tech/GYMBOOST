@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    z-index: 1;
+}
+
+button {
+    background-color: #ff8800;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 1;
+}
+
+button:hover {
+    background-color: #ff6a33;
+    transform: scale(1.05);
+}
+
+/* GUMB GORE DESNO */
+.top-right-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+}
+
+.top-btn {
+    background-color: #ff3c00;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.top-btn:hover {
+    background-color: #ff6a33;
+}
+
+/* POPUP LOGIN PROZOR */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.modal-content {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 25px;
+    border-radius: 10px;
+    width: 320px;
+    box-shadow: 0 0 20px rgba(255, 60, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff3c00;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    color: #ddd;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #666;
+    background: #222;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #ff3c00;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-login:hover {
+    background: #ff6a33;
+}
+
+/* X gumb za zatvaranje */
+.close {
+    color: #ff3c00;
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ff6a33;
+}
