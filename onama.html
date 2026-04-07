@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O nama - GYMBOOST</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: #111;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: rgba(0,0,0,0.7);
+}
+
+.navbar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    color: #00ffcc;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.hero h1 {
+    position: relative;
+    font-size: 60px;
+}
+
+/* CONTENT */
+.container {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.container h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.container p {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.card {
+    background: #222;
+    padding: 30px;
+    border-radius: 15px;
+    width: 250px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background: #333;
+}
+
+/* BUTTON */
+button {
+    margin-top: 40px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    background: #00ffcc;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="index.html"><button>Home</button></a>
+    <a href="onama.html"><button>O nama</button></a>
+    <a href="kontakt.html"><button>Kontakt</button></a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>O NAMA</h1>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+    <h2>GYMBOOST</h2>
+    <p>
+        GYMBOOST je moderna fitness platforma osmišljena za sve koji žele podići svoju formu na višu razinu.
+        Naša misija je pomoći ti da postaneš jači, brži i discipliniraniji – bez obzira jesi li početnik ili napredni vježbač.
+    </p>
+
+    <div class="cards">
+        <div class="card">
+            <h3>💪 Treninzi</h3>
+            <p>Personalizirani planovi treninga za maksimalne rezultate.</p>
+        </div>
+
+        <div class="card">
+            <h3>🔥 Motivacija</h3>
+            <p>Podrška i motivacija da nikad ne odustaneš.</p>
+        </div>
+
+        <div class="card">
+            <h3>🥗 Prehrana</h3>
+            <p>Smjernice za pravilnu prehranu i brži napredak.</p>
+        </div>
+    </div>
+
+    <a href="index.html">
+        <button>Vrati se na početnu</button>
+    </a>
+</div>
+
+</body>
+</html>

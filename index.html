@@ -1,63 +1,209 @@
 <!DOCTYPE html>
 <html lang="hr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GYMBOOST</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GYMBOOST</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: rgba(0,0,0,0.7);
+    z-index: 1001;
+}
+
+.navbar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    color: #00ffcc;
+}
+
+/* LOGIN BUTTON */
+.top-right-buttons {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.top-right-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #00ffcc;
+    cursor: pointer;
+}
+
+/* SEKCIJE */
+section {
+    height: 100vh;
+    display: none; /* sve sekcije skrivene po defaultu */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* HOME SECTION SA SLIKOM TERETANE */
+#home {
+    display: flex; /* home sekcija vidljiva na početku */
+    background-image: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1950&q=80'); /* tvoja Unsplash slika */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#home::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); /* tamni overlay da tekst bude čitljiv */
+    z-index: 0;
+}
+
+#home h1, #home button {
+    position: relative;
+    z-index: 1;
+}
+
+#home h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+/* Start Training button tamnija narandžasta */
+#home button {
+    padding: 15px 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: #FF8C00; /* tamnija narandžasta */
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#home button:hover {
+    background: #FF7000; /* još tamnija za hover efekt */
+}
+
+/* O NAMA I KONTAKT SEKCIJE */
+#about { background: #111; display: flex; }
+#contact { background: #222; display: flex; }
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.close {
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+}
+</style>
 </head>
 <body>
 
-    <!-- GUMB GORE DESNO -->
-    <div class="top-right-buttons">
-        <button class="top-btn" onclick="openModal()">Login / Sign Up</button>
-    </div>
+<!-- NAVBAR -->
+<div class="navbar">
+    <button onclick="showSection('home')">Home</button>
+    <a href="onama.html">
+    <button>O nama</button>
+</a>
+    <a href="kontakt.html">
+    <button>Kontakt</button>
+</a>
+</div>
 
+<!-- LOGIN BUTTON -->
+<div class="top-right-buttons">              
+    <button onclick="openModal()">Login</button> 
+</div>
+
+<!-- HOME SECTION -->
+<section id="home">
     <h1>GYMBOOST</h1>
     <button onclick="startTraining()">Start Training</button>
+</section>
 
-    <!-- POPUP LOGIN PROZOR -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">×</span>
-            <h2>Prijava</h2>
 
-            <form action="#" method="post">
-                <div class="input-group">
-                    <label>Korisničko ime</label>
-                    <input type="text" required>
-                </div>
 
-                <div class="input-group">
-                    <label>Lozinka</label>
-                    <input type="password" required>
-                </div>
 
-                <button type="submit" class="btn-login">Prijavi se</button>
-            </form>
-        </div>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <h2>Prijava</h2>
+        <form>
+            <label>Korisničko ime</label><br>
+            <input type="text" required><br><br>
+            <label>Lozinka</label><br>
+            <input type="password" required><br><br>
+            <button type="submit">Prijavi se</button>
+        </form>
     </div>
+</div>
 
-    <script>
-        function startTraining() {
-            alert("Let's begin your training session!");
-        }
+<script>
+// Funkcija za prikaz samo jedne sekcije
+function showSection(sectionId) {
+    const sections = ['home', 'about', 'contact'];
+    sections.forEach(id => {
+        document.getElementById(id).style.display = (id === sectionId) ? 'flex' : 'none';
+    });
+}
 
-        function openModal() {
-            document.getElementById("loginModal").style.display = "flex";
-        }
+// Početno prikazivanje home sekcije
+showSection('home');
 
-        function closeModal() {
-            document.getElementById("loginModal").style.display = "none";
-        }
+function startTraining() { alert("Let's begin your training session!"); }
+function openModal() { document.getElementById("loginModal").style.display = "flex"; }
+function closeModal() { document.getElementById("loginModal").style.display = "none"; }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById("loginModal");
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+window.onclick = function(event) {
+    const modal = document.getElementById("loginModal");
+    if (event.target === modal) { closeModal(); }
+}
+</script>
 
 </body>
 </html>

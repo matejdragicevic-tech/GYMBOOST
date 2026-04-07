@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt - GYMBOOST</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: #111;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: rgba(0,0,0,0.7);
+}
+
+.navbar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    color: #00ffcc;
+}
+
+/* HERO */
+.hero {
+    height: 50vh;
+    background: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.hero h1 {
+    position: relative;
+    font-size: 60px;
+}
+
+/* CONTENT */
+.container {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.container h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.container p {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.card {
+    background: #222;
+    padding: 30px;
+    border-radius: 15px;
+    width: 250px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background: #333;
+}
+
+/* CONTACT FORM */
+.contact-form {
+    margin-top: 50px;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    width: 300px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+.contact-form textarea {
+    height: 150px;
+}
+
+.contact-form button {
+    margin-top: 20px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    background: #00ffcc;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.contact-form button:hover {
+    background: #00e0b3;
+}
+
+.thank-you {
+    display: none;
+    color: #00ffcc;
+    font-size: 18px;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="index.html"><button>Home</button></a>
+    <a href="onama.html"><button>O nama</button></a>
+    <a href="kontakt.html"><button>Kontakt</button></a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Kontakt</h1>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+    <h2>GYMBOOST Kontakt</h2>
+    <p>Ako imaš pitanja ili želiš saznati više o našim treninzima, javi nam se putem ovih kanala:</p>
+
+    <div class="cards">
+        <div class="card">
+            <h3>📧 Email</h3>
+            <p>gymboost@email.com</p>
+        </div>
+
+        <div class="card">
+            <h3>📱 Instagram</h3>
+            <p>@gymboost</p>
+        </div>
+
+        <div class="card">
+            <h3>📞 Telefon</h3>
+            <p>+385 91 123 4567</p>
+        </div>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="contact-form">
+        <h2>Pošalji nam poruku</h2>
+        <form id="contactForm" action="https://formspree.io/f/xkopyqdb" method="POST">
+            <input type="text" name="name" placeholder="Ime" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" placeholder="Poruka" required></textarea>
+            <button type="submit">Pošalji</button>
+        </form>
+        <p class="thank-you" id="thankYouMsg">Hvala! Vaša poruka je poslana.</p>
+    </div>
+
+    <a href="index.html">
+        <button style="margin-top:50px;">Vrati se na početnu</button>
+    </a>
+</div>
+
+<script>
+// Prikaz "Hvala" poruke nakon slanja forme
+const form = document.getElementById("contactForm");
+const thankYouMsg = document.getElementById("thankYouMsg");
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault(); // sprječava default reload
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+        if (response.ok) {
+            form.style.display = "none"; // sakrij formu
+            thankYouMsg.style.display = "block"; // prikaži poruku
+        } else {
+            alert("Došlo je do greške, pokušajte ponovno.");
+        }
+    })
+    .catch(error => {
+        alert("Došlo je do greške, pokušajte ponovno.");
+    });
+});
+</script>
+
+</body>
+</html>
