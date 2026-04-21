@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GYMBOOST</title>
+<title>GYMBOOST - Početna</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     color: white;
+    background-color: #111;
 }
 
 /* NAVBAR */
@@ -51,24 +52,26 @@ body {
     border-radius: 20px;
     background: #00ffcc;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* SEKCIJE */
 section {
     height: 100vh;
-    display: none; /* sve sekcije skrivene po defaultu */
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
     padding: 0 20px;
     position: relative;
+    overflow: hidden;
 }
 
-/* HOME SECTION SA SLIKOM TERETANE */
+/* HOME SECTION */
 #home {
-    display: flex; /* home sekcija vidljiva na početku */
-    background-image: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1950&q=80'); /* tvoja Unsplash slika */
+    display: flex;
+    background-image: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=1950&q=80'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -79,7 +82,7 @@ section {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); /* tamni overlay da tekst bude čitljiv */
+    background: rgba(0,0,0,0.5);
     z-index: 0;
 }
 
@@ -93,25 +96,83 @@ section {
     margin-bottom: 20px;
 }
 
-/* Start Training button tamnija narandžasta */
-#home button {
+/* GUMBI */
+button.action-btn {
     padding: 15px 40px;
     font-size: 18px;
     border: none;
     border-radius: 30px;
-    background: #FF8C00; /* tamnija narandžasta */
+    background: #FF8C00;
     color: black;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
 }
 
-#home button:hover {
-    background: #FF7000; /* još tamnija za hover efekt */
+button.action-btn:hover {
+    background: #FF7000;
+    transform: scale(1.05);
 }
 
-/* O NAMA I KONTAKT SEKCIJE */
-#about { background: #111; display: flex; }
-#contact { background: #222; display: flex; }
+/* TRAINING SECTION */
+#training {
+    background: #000;
+}
+
+#bg-video {
+    position: absolute;
+    top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 0;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
+}
+
+.training-content {
+    position: relative;
+    z-index: 2;
+}
+
+.training-content h1 {
+    font-size: 45px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.training-options {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.training-card {
+    background: rgba(51, 51, 51, 0.8);
+    padding: 40px 30px;
+    border-radius: 15px;
+    border: 2px solid #FF8C00;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 24px;
+    font-weight: bold;
+    min-width: 200px;
+    backdrop-filter: blur(5px);
+}
+
+.training-card:hover {
+    background: #FF8C00;
+    color: black;
+    transform: scale(1.1); 
+}
 
 /* MODAL */
 .modal {
@@ -128,47 +189,50 @@ section {
 .modal-content {
     background: white;
     color: black;
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     width: 300px;
 }
 
-.close {
-    cursor: pointer;
-    float: right;
-    font-size: 20px;
-}
+.modal-content h2 { margin-top: 0; text-align: center; }
+.modal-content input { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; }
+.modal-content button[type="submit"] { width: 100%; padding: 10px; background: #00ffcc; border: none; font-weight: bold; cursor: pointer; margin-top: 15px; }
+.close { cursor: pointer; float: right; font-size: 24px; font-weight: bold; }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
     <button onclick="showSection('home')">Home</button>
-    <a href="onama.html">
-    <button>O nama</button>
-</a>
-    <a href="kontakt.html">
-    <button>Kontakt</button>
-</a>
+    <a href="onama.html"><button>O nama</button></a>
+    <a href="kontakt.html"><button>Kontakt</button></a>
 </div>
 
-<!-- LOGIN BUTTON -->
 <div class="top-right-buttons">              
     <button onclick="openModal()">Login</button> 
 </div>
 
-<!-- HOME SECTION -->
 <section id="home">
     <h1>GYMBOOST</h1>
-    <button onclick="startTraining()">Start Training</button>
+    <button class="action-btn" onclick="startTraining()">Start Training</button>
 </section>
 
+<section id="training">
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-man-training-with-a-kettlebell-in-the-gym-14441-large.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    
+    <div class="training-content">
+        <h1>Odaberi svoj plan treninga</h1>
+        <div class="training-options">
+            <div class="training-card" onclick="window.location.href='cjenik.html'">🏋️‍♂️ Snaga</div>
+            <div class="training-card" onclick="window.location.href='cjenik.html'">🏃‍♂️ Kardio</div>
+            <div class="training-card" onclick="window.location.href='cjenik.html'">🧘‍♂️ Fleksibilnost</div>
+        </div>
+    </div>
+</section>
 
-
-
-
-<!-- LOGIN MODAL -->
 <div class="modal" id="loginModal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">×</span>
@@ -184,24 +248,20 @@ section {
 </div>
 
 <script>
-// Funkcija za prikaz samo jedne sekcije
 function showSection(sectionId) {
-    const sections = ['home', 'about', 'contact'];
+    const sections = ['home', 'training'];
     sections.forEach(id => {
-        document.getElementById(id).style.display = (id === sectionId) ? 'flex' : 'none';
+        let el = document.getElementById(id);
+        if(el) el.style.display = (id === sectionId) ? 'flex' : 'none';
     });
 }
-
-// Početno prikazivanje home sekcije
 showSection('home');
-
-function startTraining() { alert("Let's begin your training session!"); }
+function startTraining() { showSection('training'); }
 function openModal() { document.getElementById("loginModal").style.display = "flex"; }
 function closeModal() { document.getElementById("loginModal").style.display = "none"; }
-
 window.onclick = function(event) {
     const modal = document.getElementById("loginModal");
-    if (event.target === modal) { closeModal(); }
+    if (event.target === modal) closeModal();
 }
 </script>
 

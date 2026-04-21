@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GYMBOOST - Cjenik i Plaćanje</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #111;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: rgba(0,0,0,0.7);
+    z-index: 1001;
+}
+
+.navbar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    color: #00ffcc;
+}
+
+/* SEKCIJE */
+section {
+    min-height: 100vh;
+    display: none; /* Skriveno po defaultu */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 20px 20px 20px;
+}
+
+/* GUMBI */
+button.action-btn {
+    padding: 15px 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: #FF8C00;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.action-btn:hover {
+    background: #FF7000;
+    transform: scale(1.05);
+}
+
+/* CJENIK */
+#pricing {
+    display: flex; /* Cjenik je vidljiv pri učitavanju */
+    background: linear-gradient(135deg, #1a1a1a, #000000);
+}
+
+#pricing h1 { font-size: 50px; margin-bottom: 50px; color: #FF8C00; }
+
+.pricing-options { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+.pricing-card {
+    background: #222;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #444;
+    width: 250px;
+    transition: 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.pricing-card:hover { border-color: #00ffcc; transform: translateY(-10px); }
+.pricing-card h2 { margin-top: 0; font-size: 28px; }
+.pricing-card .price { font-size: 40px; font-weight: bold; color: #00ffcc; margin: 20px 0; }
+.pricing-card ul { list-style: none; padding: 0; margin-bottom: 30px; text-align: left; color: #ccc; }
+.pricing-card ul li { margin-bottom: 10px; font-size: 16px; }
+.pricing-card ul li::before { content: '✔️ '; color: #00ffcc; }
+
+/* PLAĆANJE */
+#payment {
+    background: #111;
+}
+
+.payment-container {
+    background: #222;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #FF8C00;
+    width: 350px;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+.payment-container h2 { text-align: center; margin-top: 0; color: #00ffcc; }
+.payment-container label { font-size: 14px; color: #ccc; display: block; margin-top: 15px; margin-bottom: 5px; }
+.payment-container input { width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid #444; border-radius: 5px; background: #333; color: white; font-size: 16px; }
+.payment-container input:focus { outline: none; border-color: #00ffcc; }
+.payment-container .flex-row { display: flex; gap: 15px; }
+
+.cancel-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid #ccc;
+    color: #ccc;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.cancel-btn:hover { background: #333; color: white; }
+
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <button onclick="window.location.href='index.html'">Home</button>
+    <a href="onama.html"><button>O nama</button></a>
+    <a href="kontakt.html"><button>Kontakt</button></a>
+</div>
+
+<section id="pricing">
+    <h1>Odaberi paket</h1>
+    <div class="pricing-options">
+        <div class="pricing-card">
+            <h2>Osnovni</h2>
+            <p class="price">30€ <span style="font-size:16px; color:#aaa;">/mj</span></p>
+            <ul>
+                <li>Pristup teretani (0-24)</li>
+                <li>Osnovni plan treninga</li>
+                <li>Svlačionica i tuševi</li>
+            </ul>
+            <button class="action-btn" style="width: 100%; font-size: 16px; padding: 10px;" onclick="showSection('payment')">Kupi Osnovni</button>
+        </div>
+
+        <div class="pricing-card" style="border-color: #FF8C00; transform: scale(1.05);">
+            <h2>PRO (Najbolje)</h2>
+            <p class="price" style="color: #FF8C00;">50€ <span style="font-size:16px; color:#aaa;">/mj</span></p>
+            <ul>
+                <li>Sve iz Osnovnog paketa</li>
+                <li>Neograničene grupne vježbe</li>
+                <li>Konzultacije s trenerom</li>
+            </ul>
+            <button class="action-btn" style="width: 100%; font-size: 16px; padding: 10px;" onclick="showSection('payment')">Kupi PRO</button>
+        </div>
+
+        <div class="pricing-card">
+            <h2>Premium VIP</h2>
+            <p class="price">90€ <span style="font-size:16px; color:#aaa;">/mj</span></p>
+            <ul>
+                <li>Privatni ormarić</li>
+                <li>Osobni trener 3x tjedno</li>
+                <li>Spa & Sauna</li>
+            </ul>
+            <button class="action-btn" style="width: 100%; font-size: 16px; padding: 10px;" onclick="showSection('payment')">Kupi VIP</button>
+        </div>
+    </div>
+</section>
+
+<section id="payment">
+    <div class="payment-container">
+        <h2>Plaćanje</h2>
+        <form onsubmit="event.preventDefault(); alert('Uspješno ste izvršili uplatu!'); window.location.href='index.html';">
+            <label>Ime i prezime na kartici</label>
+            <input type="text" required placeholder="Npr. Ivan Horvat">
+            
+            <label>Broj kartice</label>
+            <input type="text" required placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+            
+            <div class="flex-row">
+                <div style="flex: 1;">
+                    <label>Istek (MM/GG)</label>
+                    <input type="text" required placeholder="MM/GG" maxlength="5">
+                </div>
+                <div style="flex: 1;">
+                    <label>CVV</label>
+                    <input type="password" required placeholder="123" maxlength="3">
+                </div>
+            </div>
+            
+            <button type="submit" class="action-btn" style="width: 100%; margin-top: 25px; font-size: 16px;">Plati odmah</button>
+            <button type="button" class="cancel-btn" onclick="showSection('pricing')">Odustani</button>
+        </form>
+    </div>
+</section>
+
+<script>
+// Funkcija za navigaciju između cjenika i plaćanja na ovoj stranici
+function showSection(sectionId) {
+    const sections = ['pricing', 'payment'];
+    sections.forEach(id => {
+        let el = document.getElementById(id);
+        if(el) { 
+            el.style.display = (id === sectionId) ? 'flex' : 'none';
+        }
+    });
+}
+</script>
+
+</body>
+</html>
