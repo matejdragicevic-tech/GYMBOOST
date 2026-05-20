@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planovi treninga</title>
+
+<style>
+
+html, body{
+    margin:0;
+    padding:0;
+    overflow-y:auto;
+    background:#111;
+    font-family:Arial,sans-serif;
+    color:white;
+    min-height:100vh;
+}
+
+body{
+    text-align:center;
+}
+
+.container{
+    padding:40px 20px 80px;
+}
+
+h1{
+    font-size:50px;
+    margin-bottom:30px;
+}
+
+/* BUTTONI */
+
+.buttons{
+    margin-bottom:25px;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:25px;
+    background:#FF8C00;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff7000;
+    transform:scale(1.05);
+}
+
+/* SEARCH */
+
+#searchInput{
+    width:300px;
+    max-width:90%;
+    padding:12px;
+    border:none;
+    border-radius:20px;
+    font-size:16px;
+    outline:none;
+}
+
+/* SUGGESTIONS */
+
+.suggestions{
+    width:300px;
+    max-width:90%;
+    margin:10px auto;
+    background:#222;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.suggestion-item{
+    padding:12px;
+    cursor:pointer;
+    border-bottom:1px solid #333;
+}
+
+.suggestion-item:hover{
+    background:#FF8C00;
+    color:black;
+}
+
+/* TRENING KARTICE */
+
+.training-list{
+    display:none;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    margin-top:40px;
+    padding-bottom:50px;
+}
+
+.training-card{
+    background:#222;
+    border:2px solid #FF8C00;
+    border-radius:15px;
+    width:260px;
+    padding:25px;
+    transition:0.3s;
+}
+
+.training-card:hover{
+    transform:scale(1.05);
+    background:#FF8C00;
+    color:black;
+}
+
+.training-card h2{
+    margin-top:0;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Planovi treninga</h1>
+
+    <div class="buttons">
+        <button onclick="showTrainings()">Prikaži sve</button>
+    </div>
+
+    <input 
+        type="text" 
+        id="searchInput"
+        placeholder="Search trening..."
+        onkeyup="searchTraining()"
+    >
+
+    <div class="suggestions" id="suggestions"></div>
+
+    <div class="training-list" id="trainingList">
+
+        <div class="training-card">
+            <h2>🏋️ Snaga</h2>
+            <p>Izgradnja mišića i povećanje snage.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🏃 Kardio</h2>
+            <p>Poboljšanje kondicije i sagorijevanje kalorija.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🧘 Fleksibilnost</h2>
+            <p>Istezanje i mobilnost tijela.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🔥 HIIT</h2>
+            <p>Visoko intenzivni intervalni trening.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🥊 Box</h2>
+            <p>Trening brzine i izdržljivosti.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🚴 Bicikl</h2>
+            <p>Kardio trening na biciklu.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>💪 Bodybuilding</h2>
+            <p>Program za povećanje mišićne mase.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>⚡ Crossfit</h2>
+            <p>Kombinacija snage i kondicije.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🏋️ Powerlifting</h2>
+            <p>Fokus na bench, squat i deadlift.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🤸 Calisthenics</h2>
+            <p>Trening s vlastitom težinom.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🧍 Pilates</h2>
+            <p>Stabilnost i fleksibilnost tijela.</p>
+        </div>
+
+        <div class="training-card">
+            <h2>🏊 Plivanje</h2>
+            <p>Kondicija i aktivacija cijelog tijela.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const trainings = [
+    "Snaga",
+    "Kardio",
+    "Fleksibilnost",
+    "HIIT",
+    "Box",
+    "Bicikl",
+    "Bodybuilding",
+    "Crossfit",
+    "Powerlifting",
+    "Calisthenics",
+    "Pilates",
+    "Plivanje"
+];
+
+function showTrainings(){
+    document.getElementById("trainingList").style.display = "flex";
+}
+
+function searchTraining(){
+
+    const input = document.getElementById("searchInput").value.toLowerCase();
+
+    const suggestions = document.getElementById("suggestions");
+
+    suggestions.innerHTML = "";
+
+    if(input.length >= 3){
+
+        const filtered = trainings.filter(training =>
+            training.toLowerCase().includes(input)
+        );
+
+        filtered.forEach(item => {
+
+            const div = document.createElement("div");
+
+            div.classList.add("suggestion-item");
+
+            div.innerText = item;
+
+            div.onclick = function(){
+                document.getElementById("searchInput").value = item;
+                suggestions.innerHTML = "";
+            }
+
+            suggestions.appendChild(div);
+
+        });
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
