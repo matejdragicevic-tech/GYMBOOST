@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GYMBOOST - Prehrana</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: #111;
+}
+
+/* NAVBAR (Isti kao na glavnoj stranici) */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: rgba(0,0,0,0.7);
+    z-index: 1001;
+}
+
+.navbar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    color: #00ffcc;
+}
+
+/* GLAVNA SEKCIJA */
+.nutrition-section {
+    padding: 100px 20px 50px 20px;
+    text-align: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a, #000000);
+}
+
+.nutrition-section h1 {
+    font-size: 50px;
+    color: #00ffcc;
+    margin-bottom: 20px;
+}
+
+/* KONTROLE ZA FILTRIRANJE */
+#filter-container {
+    margin-bottom: 20px; /* Malo prilagođeno da stane sortiranje ispod */
+}
+
+.filter-btn {
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    padding: 10px 25px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: #FF8C00;
+    border-color: #FF8C00;
+    color: black;
+    font-weight: bold;
+}
+
+/* NOVO: Stil za sortiranje (dodano, tvoj kod nije mijenjan) */
+#sort-container {
+    margin-bottom: 40px;
+}
+
+#sort-select {
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#sort-select:focus {
+    outline: none;
+    border-color: #00ffcc;
+}
+
+/* MREŽA PREHRANE */
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.food-card {
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 15px;
+    padding: 25px;
+    width: 250px;
+    text-align: left;
+    transition: 0.3s;
+    display: none; /* Skriveno po defaultu dok skripta ne filtrira */
+}
+
+.food-card:hover {
+    border-color: #00ffcc;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.food-card h3 {
+    margin-top: 0;
+    color: #FF8C00;
+    font-size: 22px;
+}
+
+.food-card p {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #333;
+    color: #00ffcc;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <button onclick="window.location.href='index.html'">Home</button>
+    <a href="cjenik.html"><button>Cjenik</button></a>
+    <a href="onama.html"><button>O nama</button></a>
+    <a href="kontakt.html"><button>Kontakt</button></a>
+</div>
+
+<div class="nutrition-section">
+    <h1>Planovi Prehrane</h1>
+    <p>Pronađi savršen plan prehrane za svoje ciljeve.</p>
+    
+    <div id="filter-container">
+        <button class="filter-btn active" onclick="filterData('sve')">Prikaži Sve</button>
+        <button class="filter-btn" onclick="filterData('mrsavljenje')">Mršavljenje</button>
+        <button class="filter-btn" onclick="filterData('masa')">Mišićna masa</button>
+        <button class="filter-btn" onclick="filterData('zdravlje')">Održavanje</button>
+    </div>
+
+    <div id="sort-container">
+        <label for="sort-select" style="margin-right: 10px;">Sortiraj po nazivu:</label>
+        <select id="sort-select" onchange="sortData(this.value)">
+            <option value="none">Zadano</option>
+            <option value="asc">A - Ž</option>
+            <option value="desc">Ž - A</option>
+        </select>
+    </div>
+
+    <div class="grid-container">
+        
+        <div class="food-card masa">
+            <h3>Bulking Plan</h3>
+            <p>Plan bogat ugljikohidratima i proteinima za maksimalan rast mišića. Uključuje 5 velikih obroka dnevno.</p>
+            <span class="tag">Mišićna masa</span>
+        </div>
+
+        <div class="food-card mrsavljenje">
+            <h3>Low-Carb Cut</h3>
+            <p>Smanjen unos ugljikohidrata uz visok udio proteina za sagorijevanje masnih naslaga bez gubitka mišića.</p>
+            <span class="tag">Mršavljenje</span>
+        </div>
+
+        <div class="food-card zdravlje">
+            <h3>Balansirana Prehrana</h3>
+            <p>Optimalan omjer svih makronutrijenata za dugoročno zdravlje i održavanje trenutne kilaže.</p>
+            <span class="tag">Održavanje</span>
+        </div>
+
+        <div class="food-card mrsavljenje">
+            <h3>Keto Start</h3>
+            <p>Ekstremno nizak unos ugljikohidrata, fokus na zdrave masti i proteine. Odlično za brzi početak mršavljenja.</p>
+            <span class="tag">Mršavljenje</span>
+        </div>
+
+        <div class="food-card masa">
+            <h3>High Protein Snaga</h3>
+            <p>Dodatni proteini i zdrave kalorije za ljude koji teško dobivaju na težini (hardgainers).</p>
+            <span class="tag">Mišićna masa</span>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// Funkcija za filtriranje elemenata
+function filterData(kategorija) {
+    let elementi = document.getElementsByClassName("food-card");
+    let gumbi = document.getElementsByClassName("filter-btn");
+
+    // Micanje "active" klase sa svih gumba i postavljanje na kliknuti
+    for (let i = 0; i < gumbi.length; i++) {
+        gumbi[i].classList.remove("active");
+        if(gumbi[i].getAttribute("onclick").includes(kategorija)) {
+            gumbi[i].classList.add("active");
+        }
+    }
+
+    // Prikazivanje ili skrivanje elemenata na temelju kategorije
+    for (let i = 0; i < elementi.length; i++) {
+        if (kategorija === "sve") {
+            elementi[i].style.display = "block";
+        } else {
+            if (elementi[i].classList.contains(kategorija)) {
+                elementi[i].style.display = "block";
+            } else {
+                elementi[i].style.display = "none";
+            }
+        }
+    }
+}
+
+// Pokreni funkciju odmah pri učitavanju da se prikažu svi elementi
+filterData("sve");
+
+// --- NOVO: Funkcija za sortiranje elemenata ---
+// Spremanje originalnog redoslijeda kako bi radila opcija "Zadano"
+let container = document.querySelector(".grid-container");
+let originalOrder = Array.from(document.getElementsByClassName("food-card"));
+
+function sortData(order) {
+    let cards = Array.from(document.getElementsByClassName("food-card"));
+
+    if (order === "none") {
+        // Vrati na originalni redoslijed
+        originalOrder.forEach(card => container.appendChild(card));
+        return;
+    }
+
+    cards.sort(function(a, b) {
+        let nazivA = a.querySelector("h3").innerText.toLowerCase();
+        let nazivB = b.querySelector("h3").innerText.toLowerCase();
+
+        if (order === "asc") {
+            return nazivA.localeCompare(nazivB, 'hr');
+        } else if (order === "desc") {
+            return nazivB.localeCompare(nazivA, 'hr');
+        }
+    });
+
+    // Dodaj sortirane elemente natrag u kontejner (ovo automatski mijenja redoslijed u DOM-u)
+    cards.forEach(card => container.appendChild(card));
+}
+</script>
+
+</body>
+</html>
