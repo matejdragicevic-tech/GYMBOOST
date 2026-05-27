@@ -145,6 +145,18 @@ body {
     font-size: 18px;
     margin-top: 20px;
 }
+
+/* FOOTER */
+.footer {
+    background: rgba(0,0,0,0.9);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+}
 </style>
 </head>
 
@@ -170,7 +182,7 @@ body {
     <div class="cards">
         <div class="card">
             <h3>📧 Email</h3>
-            <p>gymboost@email.com</p>
+            <p>matej.dragicevic@ss-adamic.com</p>
         </div>
 
         <div class="card">
@@ -180,7 +192,7 @@ body {
 
         <div class="card">
             <h3>📞 Telefon</h3>
-            <p>+385 91 123 4567</p>
+            <p>+385 99 631 2475</p>
         </div>
     </div>
 
@@ -201,13 +213,17 @@ body {
     </a>
 </div>
 
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 GYMBOOST | Sva prava pridržana</p>
+</footer>
+
 <script>
-// Prikaz "Hvala" poruke nakon slanja forme
 const form = document.getElementById("contactForm");
 const thankYouMsg = document.getElementById("thankYouMsg");
 
 form.addEventListener("submit", function(event) {
-    event.preventDefault(); // sprječava default reload
+    event.preventDefault();
     const formData = new FormData(form);
 
     fetch(form.action, {
@@ -217,8 +233,8 @@ form.addEventListener("submit", function(event) {
     })
     .then(response => {
         if (response.ok) {
-            form.style.display = "none"; // sakrij formu
-            thankYouMsg.style.display = "block"; // prikaži poruku
+            form.style.display = "none";
+            thankYouMsg.style.display = "block";
         } else {
             alert("Došlo je do greške, pokušajte ponovno.");
         }

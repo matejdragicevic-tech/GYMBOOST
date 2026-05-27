@@ -206,6 +206,7 @@ button.action-btn:hover {
     <button onclick="showSection('home')">Home</button>
     <a href="onama.html"><button>O nama</button></a>
     <a href="kontakt.html"><button>Kontakt</button></a>
+<a href="treninzi.html"><button>Treninzi</button></a>
 </div>
 
 <div class="top-right-buttons">              
@@ -246,24 +247,6 @@ button.action-btn:hover {
         </form>
     </div>
 </div>
-
-<script>
-function showSection(sectionId) {
-    const sections = ['home', 'training'];
-    sections.forEach(id => {
-        let el = document.getElementById(id);
-        if(el) el.style.display = (id === sectionId) ? 'flex' : 'none';
-    });
-}
-showSection('home');
-function startTraining() { showSection('training'); }
-function openModal() { document.getElementById("loginModal").style.display = "flex"; }
-function closeModal() { document.getElementById("loginModal").style.display = "none"; }
-window.onclick = function(event) {
-    const modal = document.getElementById("loginModal");
-    if (event.target === modal) closeModal();
-}
-</script>
-
+<script src="treninzi.js"></script>
 </body>
 </html>

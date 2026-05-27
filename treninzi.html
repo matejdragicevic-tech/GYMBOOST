@@ -204,64 +204,11 @@ button:hover{
     </div>
 
 </div>
+<script src="searchtreninzi.js"></script>
+</div>
 
-<script>
-
-const trainings = [
-    "Snaga",
-    "Kardio",
-    "Fleksibilnost",
-    "HIIT",
-    "Box",
-    "Bicikl",
-    "Bodybuilding",
-    "Crossfit",
-    "Powerlifting",
-    "Calisthenics",
-    "Pilates",
-    "Plivanje"
-];
-
-function showTrainings(){
-    document.getElementById("trainingList").style.display = "flex";
-}
-
-function searchTraining(){
-
-    const input = document.getElementById("searchInput").value.toLowerCase();
-
-    const suggestions = document.getElementById("suggestions");
-
-    suggestions.innerHTML = "";
-
-    if(input.length >= 3){
-
-        const filtered = trainings.filter(training =>
-            training.toLowerCase().includes(input)
-        );
-
-        filtered.forEach(item => {
-
-            const div = document.createElement("div");
-
-            div.classList.add("suggestion-item");
-
-            div.innerText = item;
-
-            div.onclick = function(){
-                document.getElementById("searchInput").value = item;
-                suggestions.innerHTML = "";
-            }
-
-            suggestions.appendChild(div);
-
-        });
-
-    }
-
-}
-
-</script>
+</body>
+</html>
 
 </body>
 </html>
